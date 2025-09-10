@@ -1,3 +1,6 @@
+import 'package:crypto_coin_ticker/widgets/coin_info.dart';
+import 'package:crypto_coin_ticker/widgets/coins-dropdown.dart';
+import 'package:crypto_coin_ticker/widgets/currency_card.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -23,32 +26,24 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsetsGeometry.all(8.0),
+        padding: EdgeInsets.all(8.0),
         child: Column(
           spacing: 18.0,
           children: <Widget>[
-            Expanded(child: Container(color: Colors.black12)),
+            Expanded(
+              child: Card(elevation: 4.0, child: Center(child: CoinInfo())),
+            ),
             Text(
-              "Currency Exchange",
+              "Currency",
               textAlign: TextAlign.center,
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               spacing: 12.0,
-              children: <Widget>[
-                Expanded(
-                  child: Container(height: 120.0, color: Colors.black12),
-                ),
-                Expanded(
-                  child: Container(height: 120.0, color: Colors.black12),
-                ),
-                Expanded(
-                  child: Container(height: 120.0, color: Colors.black12),
-                ),
-              ],
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[CurrencyCard(), CurrencyCard()],
             ),
-            SizedBox(),
+            CoinsDropdown(),
           ],
         ),
       ),
