@@ -2,12 +2,14 @@ import 'package:crypto_coin_ticker/widgets/coin_info.dart';
 import 'package:crypto_coin_ticker/widgets/coins-dropdown.dart';
 import 'package:crypto_coin_ticker/widgets/currency_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+Future main() async {
+  await dotenv.load(fileName: ".env");
   runApp(CryptoCoinTicker());
 }
 
-class CryptoCoinTicker extends StatelessWidget {
+final class CryptoCoinTicker extends StatelessWidget {
   const CryptoCoinTicker({super.key});
 
   @override
@@ -38,6 +40,7 @@ class Home extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
+
             Row(
               spacing: 12.0,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
