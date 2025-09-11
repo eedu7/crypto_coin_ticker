@@ -1,10 +1,11 @@
 import 'dart:convert';
 
+import 'package:crypto_coin_ticker/models/crypto_coin.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 class CryptoDataApi {
-  Future<Map<String, String>> getData({
+  Future<CryptoCoin> getData({
     String currency = 'USD',
     required String code,
     bool meta = true,
@@ -23,18 +24,6 @@ class CryptoDataApi {
       throw Exception('Failed to fetch data: ${response.body}');
     }
 
-    var responseBody = jsonDecode(response.body);
-
-    String name = responseBody['name'];
-    String symbol = responseBody['symbol'];
-    String symbolColor = responseBody['color'];
-    String rate = (responseBody['rate'] as num).toStringAsFixed(2);
-
-    return {
-      'name': name,
-      'symbol': symbol,
-      'symbolColor': symbolColor,
-      'rate': rate,
-    };
+    return CryptoCoin.fromJson(jsonDecode(response.body));
   }
 }

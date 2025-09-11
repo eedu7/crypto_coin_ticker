@@ -1,10 +1,11 @@
+import 'package:crypto_coin_ticker/models/crypto_coin.dart';
 import 'package:crypto_coin_ticker/services/crypto_data_api.dart';
 import 'package:flutter/material.dart';
 
 const List<String> coins = <String>["BTC", "ETH"];
 
 class CoinsDropdown extends StatefulWidget {
-  final Function(Map<String, String>) onCoinSelected;
+  final Function(CryptoCoin newCoin) onCoinSelected;
 
   const CoinsDropdown({super.key, required this.onCoinSelected});
 
@@ -22,8 +23,8 @@ class _CoinsDropdownState extends State<CoinsDropdown> {
       width: double.infinity,
       initialSelection: dropdownValue,
       onSelected: (value) async {
-        Map<String, String> data = await cryptoDataApi.getData(code: value!);
-        widget.onCoinSelected(data);
+        CryptoCoin newCoin = await cryptoDataApi.getData(code: value!);
+        widget.onCoinSelected(newCoin);
         setState(() {
           dropdownValue = value;
         });

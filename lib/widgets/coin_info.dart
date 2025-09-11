@@ -1,18 +1,10 @@
+import 'package:crypto_coin_ticker/models/crypto_coin.dart';
 import 'package:flutter/material.dart';
 
 class CoinInfo extends StatefulWidget {
-  final String symbol;
-  final String symbolColor;
-  final String rate;
-  final String name;
+  final CryptoCoin coin;
 
-  const CoinInfo({
-    super.key,
-    required this.symbol,
-    required this.symbolColor,
-    required this.rate,
-    required this.name,
-  });
+  const CoinInfo({super.key, required this.coin});
 
   @override
   State<CoinInfo> createState() => _CoinInfoState();
@@ -35,15 +27,15 @@ class _CoinInfoState extends State<CoinInfo> {
       spacing: 12.0,
       children: <Widget>[
         Text(
-          '\$ ${widget.rate}',
+          '\$ ${widget.coin.rate}',
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32.0),
         ),
         Text(
-          '${widget.symbol} ${widget.name}',
+          '${widget.coin.symbol} ${widget.coin.name}',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 16.0,
-            color: hexToColor(widget.symbolColor),
+            color: hexToColor(widget.coin.symbolColor),
           ),
         ),
       ],
