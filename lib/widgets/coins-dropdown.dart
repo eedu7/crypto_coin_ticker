@@ -1,33 +1,31 @@
+import 'package:crypto_coin_ticker/services/crypto_data_api.dart';
 import 'package:flutter/material.dart';
 
-const List<String> coins = <String>[
-  "BTC",
-  "ETH",
-  "XRP",
-  "SOL",
-  "SUI",
-  "DOGE",
-  "Eigen",
-];
+const List<String> coins = <String>["BTC", "ETH"];
 
 class CoinsDropdown extends StatefulWidget {
-  const CoinsDropdown({super.key});
+  final Function(Map<String, String>) onCoinSelected;
+
+  const CoinsDropdown({super.key, required this.onCoinSelected});
 
   @override
   State<CoinsDropdown> createState() => _CoinsDropdownState();
 }
 
 class _CoinsDropdownState extends State<CoinsDropdown> {
-  String dropdownValue = coins.first;
-
   @override
   Widget build(BuildContext context) {
+    String dropdownValue = coins.first;
+    CryptoDataApi cryptoDataApi = CryptoDataApi();
+
     return DropdownMenu(
       width: double.infinity,
       initialSelection: dropdownValue,
-      onSelected: (value) {
+      onSelected: (value) async {
+        Map<String, String> data = await cryptoDataApi.getData(code: value!);
+        widget.onCoinSelected(data);
         setState(() {
-          dropdownValue = value!;
+          dropdownValue = value;
         });
       },
       dropdownMenuEntries: coins.map((String value) {
