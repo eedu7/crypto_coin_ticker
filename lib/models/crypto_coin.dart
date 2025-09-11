@@ -16,7 +16,9 @@ class CryptoCoin {
       name: json['name'] ?? 'Unknown',
       symbol: json['symbol'] ?? 'N/A',
       symbolColor: json['color'] ?? '#000000',
-      rate: json["rate"] ? (json["rate"] as num).toStringAsFixed(2) : "0.0",
+      rate: json["rate"] != null
+          ? (json["rate"] as num).toStringAsFixed(2)
+          : "0.0",
     );
   }
 }
